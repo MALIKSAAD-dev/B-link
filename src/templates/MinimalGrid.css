@@ -1,0 +1,326 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+.tpl-mg {
+    font-family: 'Inter', sans-serif;
+    background: #f4f3f1;
+    color: #1a1a1a;
+    min-height: 100vh;
+    padding: 20px;
+    overflow-x: hidden
+}
+
+.tpl-mg * {
+    box-sizing: border-box
+}
+
+/* Grid */
+.tpl-mg__grid {
+    max-width: 960px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px
+}
+
+/* Card Base */
+.tpl-mg__card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 28px;
+    border: 1px solid rgba(0, 0, 0, .04);
+    transition: all .3s;
+    position: relative;
+    overflow: hidden
+}
+
+.tpl-mg__card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, .05)
+}
+
+.tpl-mg__card-label {
+    display: block;
+    font-size: .6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .16em;
+    color: #bbb;
+    margin-bottom: 14px
+}
+
+/* Hero Card */
+.tpl-mg__card--hero {
+    grid-column: 1/-1;
+    text-align: center;
+    padding: 48px 28px 36px;
+    position: relative
+}
+
+.tpl-mg__hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 160px;
+    background: linear-gradient(135deg, #f8f8f8 0%, #eee 100%);
+    border-radius: 16px 16px 0 0
+}
+
+.tpl-mg__avatar-wrap {
+    position: relative;
+    display: inline-block;
+    margin-bottom: 16px;
+    z-index: 1
+}
+
+.tpl-mg__avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #fff;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, .08);
+    position: relative;
+    z-index: 1
+}
+
+.tpl-mg__avatar-ring {
+    position: absolute;
+    inset: -6px;
+    border-radius: 50%;
+    border: 2px dashed #ddd;
+    animation: mg-spin 30s linear infinite
+}
+
+@keyframes mg-spin {
+    to {
+        transform: rotate(360deg)
+    }
+}
+
+.tpl-mg__card--hero h1 {
+    font-size: clamp(1.5rem, 3.5vw, 2.2rem);
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    margin-bottom: 4px;
+    position: relative;
+    z-index: 1
+}
+
+.tpl-mg__title {
+    font-size: .88rem;
+    color: #888;
+    position: relative;
+    z-index: 1
+}
+
+.tpl-mg__loc {
+    font-size: .75rem;
+    color: #bbb;
+    margin-top: 2px;
+    position: relative;
+    z-index: 1
+}
+
+.tpl-mg__hero-cta {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 16px;
+    position: relative;
+    z-index: 1
+}
+
+.tpl-mg__btn {
+    padding: 9px 22px;
+    border-radius: 100px;
+    font-size: .8rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: all .2s;
+    background: #111;
+    color: #fff
+}
+
+.tpl-mg__btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, .1)
+}
+
+.tpl-mg__btn--ghost {
+    background: transparent;
+    border: 1.5px solid #ddd;
+    color: #777
+}
+
+.tpl-mg__btn--ghost:hover {
+    border-color: #111;
+    color: #111
+}
+
+/* Bio Card */
+.tpl-mg__card--bio p {
+    font-size: .88rem;
+    color: #777;
+    line-height: 1.8;
+    word-wrap: break-word
+}
+
+/* Skills Card */
+.tpl-mg__skills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px
+}
+
+.tpl-mg__skill {
+    padding: 7px 16px;
+    background: #f8f8f8;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    font-size: .78rem;
+    font-weight: 500;
+    color: #555;
+    transition: all .2s
+}
+
+.tpl-mg__skill:hover {
+    border-color: #111;
+    color: #111;
+    transform: translateY(-1px)
+}
+
+/* Contact Card */
+.tpl-mg__contact-links {
+    display: flex;
+    flex-direction: column;
+    gap: 4px
+}
+
+.tpl-mg__contact-links a {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: .82rem;
+    color: #555;
+    text-decoration: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    transition: all .2s
+}
+
+.tpl-mg__contact-links a:hover {
+    background: #f8f8f8;
+    color: #111
+}
+
+.tpl-mg__contact-icon {
+    font-size: .9rem
+}
+
+/* Project Cards */
+.tpl-mg__card--project {
+    padding: 0;
+    overflow: hidden
+}
+
+.tpl-mg__proj-img-wrap {
+    position: relative;
+    overflow: hidden
+}
+
+.tpl-mg__proj-img-wrap img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+    transition: transform .5s
+}
+
+.tpl-mg__card--project:hover .tpl-mg__proj-img-wrap img {
+    transform: scale(1.05)
+}
+
+.tpl-mg__proj-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, .55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity .3s
+}
+
+.tpl-mg__card--project:hover .tpl-mg__proj-overlay {
+    opacity: 1
+}
+
+.tpl-mg__proj-overlay a {
+    padding: 8px 22px;
+    background: #fff;
+    color: #111;
+    border-radius: 100px;
+    font-size: .78rem;
+    font-weight: 600;
+    text-decoration: none
+}
+
+.tpl-mg__proj-body {
+    padding: 18px
+}
+
+.tpl-mg__proj-num {
+    font-size: .6rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    color: #ccc;
+    margin-bottom: 4px;
+    display: block
+}
+
+.tpl-mg__proj-body h3 {
+    font-size: .92rem;
+    font-weight: 700;
+    margin-bottom: 4px
+}
+
+.tpl-mg__proj-body p {
+    font-size: .8rem;
+    color: #888;
+    line-height: 1.6;
+    word-wrap: break-word
+}
+
+.tpl-mg__proj-link {
+    font-size: .78rem;
+    font-weight: 600;
+    color: #111;
+    text-decoration: none;
+    margin-top: 6px;
+    display: inline-block
+}
+
+@media(max-width:640px) {
+    .tpl-mg {
+        padding: 10px
+    }
+
+    .tpl-mg__grid {
+        grid-template-columns: 1fr;
+        gap: 10px
+    }
+
+    .tpl-mg__card--hero {
+        padding: 32px 16px 24px
+    }
+
+    .tpl-mg__hero-bg {
+        height: 120px
+    }
+
+    .tpl-mg__proj-img-wrap img {
+        height: 150px
+    }
+}
