@@ -1,5 +1,7 @@
-import { kv } from '@vercel/kv';
+import Redis from 'ioredis';
 import { NextRequest, NextResponse } from 'next/server';
+
+const redis = new Redis(process.env.REDIS_URL || '');
 
 export async function POST(request: NextRequest) {
     try {
@@ -19,13 +21,13 @@ export async function POST(request: NextRequest) {
         }
 
         // Check if username is taken
-        const existing = await kv.get(`portfolio:${username}`);
+        const existing = await redis.get(`portfolio:${username}`);
         if (existing) {
             return NextResponse.json({ error: 'Username is already taken' }, { status: 409 });
         }
 
         // Save portfolio
-        await kv.set(`portfolio:${username}`, JSON.stringify({ template, data, createdAt: new Date().toISOString() }));
+        await redis.set(`portfolio:${username}`, JSON.stringify({ template, data, createdAt: new Date().toISOString() }));
 
         return NextResponse.json({ success: true, url: `/p/${username}` });
     } catch (error) {

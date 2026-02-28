@@ -1,5 +1,7 @@
-import { kv } from '@vercel/kv';
+import Redis from 'ioredis';
 import { NextRequest, NextResponse } from 'next/server';
+
+const redis = new Redis(process.env.REDIS_URL || '');
 
 export async function GET(request: NextRequest) {
     const { searchParams } = new URL(request.url);
@@ -10,7 +12,7 @@ export async function GET(request: NextRequest) {
     }
 
     try {
-        const existing = await kv.get(`portfolio:${username}`);
+        const existing = await redis.get(`portfolio:${username}`);
         return NextResponse.json({ available: !existing });
     } catch {
         return NextResponse.json({ available: true });

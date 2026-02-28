@@ -1,6 +1,8 @@
-import { kv } from '@vercel/kv';
+import Redis from 'ioredis';
 import { notFound } from 'next/navigation';
 import PortfolioRenderer from '@/components/PortfolioRenderer';
+
+const redis = new Redis(process.env.REDIS_URL || '');
 
 interface PageProps {
     params: Promise<{ username: string }>;
@@ -10,7 +12,7 @@ export async function generateMetadata({ params }: PageProps) {
     const { username } = await params;
 
     try {
-        const raw = await kv.get(`portfolio:${username}`);
+        const raw = await redis.get(`portfolio:${username}`);
         if (!raw) return { title: 'Portfolio Not Found' };
 
         const portfolio = typeof raw === 'string' ? JSON.parse(raw) : raw;
@@ -34,7 +36,7 @@ export default async function PortfolioPage({ params }: PageProps) {
 
     let portfolioData;
     try {
-        const raw = await kv.get(`portfolio:${username}`);
+        const raw = await redis.get(`portfolio:${username}`);
         if (!raw) notFound();
         portfolioData = typeof raw === 'string' ? JSON.parse(raw) : raw;
     } catch {
