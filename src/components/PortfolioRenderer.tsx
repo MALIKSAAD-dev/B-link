@@ -52,6 +52,13 @@ const templateComponents: Record<string, React.FC<{ data: PortfolioData }>> = {
     'elegant-dark': ElegantDarkTemplate,
 };
 
+// Helper to ensure URLs are absolute
+const formatUrl = (url?: string | null): string | undefined => {
+    if (!url) return undefined;
+    if (url.startsWith('http://') || url.startsWith('https://')) return url;
+    return `https://${url}`;
+};
+
 export default function PortfolioRenderer({ template, data }: { template: string; data: Record<string, unknown> }) {
     const TemplateComponent = templateComponents[template];
 
@@ -66,5 +73,24 @@ export default function PortfolioRenderer({ template, data }: { template: string
         );
     }
 
-    return <TemplateComponent data={data as unknown as PortfolioData} />;
+    // Process data to ensure all user-entered links are fully absolute
+    const formattedData = {
+        ...data,
+        website: formatUrl(data.website as string),
+        github: formatUrl(data.github as string),
+        linkedin: formatUrl(data.linkedin as string),
+        twitter: formatUrl(data.twitter as string),
+        instagram: formatUrl(data.instagram as string),
+        tiktok: formatUrl(data.tiktok as string),
+        youtube: formatUrl(data.youtube as string),
+        facebook: formatUrl(data.facebook as string),
+        projects: Array.isArray(data.projects)
+            ? data.projects.map((proj: any) => ({
+                ...proj,
+                liveUrl: formatUrl(proj.liveUrl)
+            }))
+            : []
+    } as unknown as PortfolioData;
+
+    return <TemplateComponent data={formattedData} />;
 }
